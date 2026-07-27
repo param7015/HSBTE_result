@@ -1,22 +1,99 @@
+// import http from "node:http";
+
+// const allowedRollNumber = "250151000146";
+
+// const server = http.createServer((request, response) => {
+//   response.setHeader("Access-Control-Allow-Origin", "https://hsbte-result-lpn0.onrender.com");
+//   response.setHeader("Content-Type", "application/json");
+//   const url = new URL(request.url, "https://hsbte-result-backend.onrender.com");
+
+//   if (request.method === "GET" && url.pathname === "/api/result") {
+//     const rollNo = url.searchParams.get("rollNo")?.trim();
+//     const found = rollNo === allowedRollNumber;
+//     response.writeHead(found ? 200 : 404);
+//     response.end(JSON.stringify(found ? { found: true, rollNo } : { found: false, message: "Wrong roll number" }));
+//     return;
+//   }
+
+//   response.writeHead(404);
+//   response.end(JSON.stringify({ message: "Not found" }));
+// });
+
+// server.listen(3001, () => console.log("Result API running on http://localhost:3001"));
+
+
+
 import http from "node:http";
 
 const allowedRollNumber = "250151000146";
 
 const server = http.createServer((request, response) => {
-  response.setHeader("Access-Control-Allow-Origin", "https://hsbte-result-lpn0.onrender.com");
-  response.setHeader("Content-Type", "application/json");
-  const url = new URL(request.url, "https://hsbte-result-backend.onrender.com");
 
-  if (request.method === "GET" && url.pathname === "/api/result") {
-    const rollNo = url.searchParams.get("rollNo")?.trim();
-    const found = rollNo === allowedRollNumber;
-    response.writeHead(found ? 200 : 404);
-    response.end(JSON.stringify(found ? { found: true, rollNo } : { found: false, message: "Wrong roll number" }));
+  response.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://hsbte-result-lpn0.onrender.com"
+  );
+
+  response.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, OPTIONS"
+  );
+
+  response.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type"
+  );
+
+  response.setHeader(
+    "Content-Type",
+    "application/json"
+  );
+
+
+  if (request.method === "OPTIONS") {
+    response.writeHead(204);
+    response.end();
     return;
   }
 
+
+  const url = new URL(
+    request.url,
+    `http://${request.headers.host}`
+  );
+
+
+  if (request.method === "GET" && url.pathname === "/api/result") {
+
+    const rollNo = url.searchParams.get("rollNo")?.trim();
+
+    const found = rollNo === allowedRollNumber;
+
+    response.writeHead(found ? 200 : 404);
+
+    response.end(
+      JSON.stringify(
+        found
+          ? { found: true, rollNo }
+          : { found: false, message: "Wrong roll number" }
+      )
+    );
+
+    return;
+  }
+
+
   response.writeHead(404);
-  response.end(JSON.stringify({ message: "Not found" }));
+
+  response.end(
+    JSON.stringify({ message: "Not found" })
+  );
+
 });
 
-server.listen(3001, () => console.log("Result API running on http://localhost:3001"));
+
+const PORT = process.env.PORT || 3001;
+
+server.listen(PORT, () => {
+  console.log(`Result API running on port ${PORT}`);
+});
