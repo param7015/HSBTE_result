@@ -37,8 +37,16 @@ table { border-collapse: collapse; width: 100%; } caption { border: 1px solid #d
   .details { table-layout: fixed; }
   .details th { width: 86px; }
   .details td { overflow-wrap: anywhere; }
-  .table-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 8px; }
-  .table-scroll .marks, .table-scroll .reappear { min-width: 520px; margin-top: 0; }
+  .table-scroll { width: 100%; margin-top: 8px; }
+  .table-scroll .marks, .table-scroll .reappear { width: 100%; min-width: 0; margin-top: 0; }
+  .marks th,.marks td { padding: 3px 1px; overflow-wrap: anywhere; word-break: break-word; }
+  .marks thead th,.marks td { font-size: clamp(6px, 1.8vw, 9px); line-height: 1.15; }
+  .marks th:first-child,.marks td:first-child { width: 21%; line-height: 1.15; }
+  .marks th:nth-child(2),.marks td:nth-child(2) { width: 7%; }
+  .marks td { height: auto; min-height: 42px; }
+  .reappear th,.reappear td { padding: 3px 2px; font-size: clamp(7px, 2.1vw, 10px); overflow-wrap: anywhere; }
+  .reappear th:first-child { width: 13%; }
+  .reappear th:nth-child(2) { width: 48%; }
   .notice { padding: 6px 5px 3px; }
   .notice h2 { font-size: 15px; }
   .notice ol { margin-left: 22px; font-size: 10px; }
