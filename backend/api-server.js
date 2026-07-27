@@ -23,6 +23,8 @@
 
 
 
+
+
 import http from "node:http";
 
 const allowedRollNumber = "250151000146";
@@ -35,31 +37,13 @@ const server = http.createServer((request, response) => {
   );
 
   response.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, OPTIONS"
-  );
-
-  response.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type"
-  );
-
-  response.setHeader(
     "Content-Type",
     "application/json"
   );
 
-
-  if (request.method === "OPTIONS") {
-    response.writeHead(204);
-    response.end();
-    return;
-  }
-
-
   const url = new URL(
     request.url,
-    `http://${request.headers.host}`
+    "https://hsbte-result-backend.onrender.com"
   );
 
 
