@@ -3,7 +3,7 @@ import http from "node:http";
 const allowedRollNumber = "250151000146";
 
 const server = http.createServer((request, response) => {
-  response.setHeader("Access-Control-Allow-Origin", "https://hsbte-result-lpn0.onrender.com/");
+  response.setHeader("Access-Control-Allow-Origin", "https://hsbte-result-lpn0.onrender.com");
   response.setHeader("Content-Type", "application/json");
   const url = new URL(request.url, "https://hsbte-result-backend.onrender.com");
 
