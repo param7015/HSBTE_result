@@ -3,9 +3,9 @@ import http from "node:http";
 const allowedRollNumber = "250151000146";
 
 const server = http.createServer((request, response) => {
-  response.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+  response.setHeader("Access-Control-Allow-Origin", "https://hsbte-result-lpn0.onrender.com/");
   response.setHeader("Content-Type", "application/json");
-  const url = new URL(request.url, "http://localhost:3001");
+  const url = new URL(request.url, "https://hsbte-result-backend.onrender.com");
 
   if (request.method === "GET" && url.pathname === "/api/result") {
     const rollNo = url.searchParams.get("rollNo")?.trim();
