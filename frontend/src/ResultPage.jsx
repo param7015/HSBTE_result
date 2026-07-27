@@ -23,7 +23,7 @@ function ResultPage() {
     setMessage("");
     setShowResult(false);
     try {
-      const response = await fetch(`/api/result?rollNo=${encodeURIComponent(rollNumber.trim())}`);
+      const response = await fetch(`https://hsbte-result-backend.onrender.com/api/result?rollNo=${encodeURIComponent(rollNumber.trim())}`);
       const data = await response.json();
       if (response.ok && data.found) setShowResult(true);
       else setMessage(data.message || "Wrong roll number");
